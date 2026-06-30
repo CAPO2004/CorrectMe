@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CorrectMe — المعلم الساخر لتعليم المحادثة بالإنجليزية</title>
+  <meta name="description" content="تطبيق ويب تفاعلي لتعليم مهارات المحادثة باللغة الإنجليزية واجتياز اختبار الآيلتس مع معلم آلي مصري ساخر يصحح لك أخطاءك فوراً.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Floating background mesh blobs -->
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+
+  <!-- Header Section -->
+  <header>
+    <div class="logo">CorrectMe</div>
+    <div class="header-actions">
+      <!-- Chat history toggle button -->
+      <button class="icon-btn" id="toggle-history-btn" title="سجل المحادثات">
+        <svg viewBox="0 0 24 24">
+          <path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6a7 7 0 1 1 7 7 7.07 7.07 0 0 1-6-3H4.26a9 9 0 1 0 8.74-16zm-1 5v5l4.25 2.52.77-1.28-3.52-2.09V8z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Interactive Avatar Section -->
+  <main>
+    <div class="avatar-container">
+      <canvas id="avatar-canvas"></canvas>
+    </div>
+
+    <div class="status-container">
+      <div class="status-label" id="status-text">جاري تحميل المعلم...</div>
+      <div class="interim-transcript" id="interim-text">...</div>
+    </div>
+  </main>
+
+  <!-- Control Section -->
+  <footer></footer>
+
+  <!-- Floating Chat History Panel -->
+  <div class="history-panel" id="history-panel">
+    <div class="history-header">
+      <button class="icon-btn" id="close-history" onclick="document.getElementById('history-panel').classList.remove('open')">
+        <svg viewBox="0 0 24 24" style="transform: rotate(180deg);">
+          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      </button>
+      <h3>سجل المحادثات</h3>
+    </div>
+    <div class="history-container" id="history-container">
+      <!-- Conversation bubbles dynamically inserted here -->
+    </div>
+  </div>
+
+  <!-- Core Scripts -->
+  <script type="module" src="js/app.js?v=33"></script>
+</body>
+</html>
