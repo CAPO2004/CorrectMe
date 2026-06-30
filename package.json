@@ -1,0 +1,15 @@
+{
+  "name": "correctme",
+  "version": "1.0.0",
+  "description": "CorrectMe - Sarcastic IELTS Coach AI Voice Agent",
+  "main": "index.html",
+  "scripts": {
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.21.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

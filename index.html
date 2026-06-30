@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" translate="no" class="notranslate">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <title>CorrectMe — المعلم الساخر لتعليم المحادثة بالإنجليزية</title>
+  <meta name="description" content="تطبيق ويب تفاعلي لتعليم مهارات المحادثة باللغة الإنجليزية واجتياز اختبار الآيلتس مع معلم آلي مصري ساخر يصحح لك أخطاءك فوراً.">
+  <link rel="stylesheet" href="css/styles.css?v=38">
+</head>
+<body>
+  <!-- Floating background mesh blobs -->
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+
+  <!-- Header Section -->
+  <header>
+    <div class="logo" id="logo">CorrectMe</div>
+    <div class="header-actions">
+      <!-- Language Toggle Switcher -->
+      <div class="lang-switch-container" id="lang-switch-container">
+        <button class="lang-btn active" id="lang-en" data-lang="en-US">EN</button>
+        <button class="lang-btn" id="lang-ar" data-lang="ar-EG">عربي</button>
+      </div>
+      <!-- Chat history toggle button -->
+      <button class="icon-btn" id="toggle-history-btn" title="سجل المحادثات">
+        <svg viewBox="0 0 24 24">
+          <path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6a7 7 0 1 1 7 7 7.07 7.07 0 0 1-6-3H4.26a9 9 0 1 0 8.74-16zm-1 5v5l4.25 2.52.77-1.28-3.52-2.09V8z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Interactive Avatar Section -->
+  <main>
+    <div class="avatar-container">
+      <canvas id="avatar-canvas"></canvas>
+    </div>
+
+    <div class="status-container">
+      <div class="status-label" id="status-text">جاري تحميل المعلم...</div>
+      <div class="interim-transcript" id="interim-text">...</div>
+    </div>
+  </main>
+
+  <!-- Control Section -->
+  <footer></footer>
+
+  <!-- Floating Chat History Panel -->
+  <div class="history-panel" id="history-panel">
+    <div class="history-header">
+      <button class="icon-btn" id="close-history" onclick="document.getElementById('history-panel').classList.remove('open')">
+        <svg viewBox="0 0 24 24" style="transform: rotate(180deg);">
+          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+        </svg>
+      </button>
+      <h3>سجل المحادثات</h3>
+    </div>
+    <div class="history-container" id="history-container">
+      <!-- Conversation bubbles dynamically inserted here -->
+    </div>
+  </div>
+
+  <!-- Hidden Admin Panel (5 clicks on logo or ?admin=1) -->
+  <div class="admin-overlay" id="admin-overlay">
+    <div class="admin-modal">
+      <div class="admin-header">
+        <h3>🔧 لوحة التحكم</h3>
+        <button class="admin-close" id="admin-close">&times;</button>
+      </div>
+      <div class="admin-body">
+        <!-- Step 1: Login -->
+        <div id="admin-login-section">
+          <div class="admin-field">
+            <label for="admin-username">👤 اسم المستخدم</label>
+            <input type="text" id="admin-username" placeholder="Username" autocomplete="off" dir="ltr">
+          </div>
+          <div class="admin-field">
+            <label for="admin-password">🔒 كلمة المرور</label>
+            <div class="admin-input-row">
+              <input type="password" id="admin-password" placeholder="Password" autocomplete="off" dir="ltr">
+              <button class="admin-toggle-eye" data-target="admin-password" title="إظهار/إخفاء">👁️</button>
+            </div>
+          </div>
+          <span class="admin-status" id="login-status"></span>
+          <button class="admin-btn save" id="admin-login-btn" style="margin-top:8px">🔓 دخول</button>
+        </div>
+
+        <!-- Step 2: API Keys (hidden until login) -->
+        <div id="admin-keys-section" style="display:none">
+          <div class="admin-field">
+            <label for="admin-gemini-key">🔑 Gemini API Key</label>
+            <div class="admin-input-row">
+              <input type="password" id="admin-gemini-key" placeholder="حط الـ Key الجديد هنا..." autocomplete="off">
+              <button class="admin-toggle-eye" data-target="admin-gemini-key" title="إظهار/إخفاء">👁️</button>
+            </div>
+            <span class="admin-status" id="gemini-status"></span>
+          </div>
+          <div class="admin-field">
+            <label for="admin-eleven-key">🎙️ ElevenLabs API Key</label>
+            <div class="admin-input-row">
+              <input type="password" id="admin-eleven-key" placeholder="حط الـ Key الجديد هنا..." autocomplete="off">
+              <button class="admin-toggle-eye" data-target="admin-eleven-key" title="إظهار/إخفاء">👁️</button>
+            </div>
+            <span class="admin-status" id="eleven-status"></span>
+          </div>
+          <div class="admin-actions">
+            <button class="admin-btn save" id="admin-save">💾 حفظ وتطبيق</button>
+            <button class="admin-btn reset" id="admin-reset">🔄 رجوع للافتراضي</button>
+          </div>
+          <p class="admin-hint">⚡ لما الـ Key يخلص، اعمل أكونت جديد وحط الـ Key هنا.<br>التغيير بيتطبق عند <strong>كل</strong> المستخدمين.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core Scripts -->
+  <script type="module" src="js/app.js?v=38"></script>
+</body>
+</html>
